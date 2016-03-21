@@ -1,3 +1,5 @@
+unitToFix = null;
+
 $.get('contents-typeset.html').then(function (data) {
   window.data = data;
   $('.contents-column').append(data);
@@ -13,9 +15,15 @@ $.get('contents-typeset.html').then(function (data) {
 
   $('.mode-switch')
     .click(function () {
+      if (unitToFix) {
+        unitToFixTop = unitToFix.getBoundingClientRect().top;
+      }
       expanded = $('.contents-column').attr("data-expanded") || 1;
       newExpanded = 1 - expanded;
       $('.contents-column').attr("data-expanded", newExpanded);
+      if (unitToFix) {
+        $('body')[0].scrollTop += (unitToFix.getBoundingClientRect().top - unitToFixTop) * 3 / 4;
+      }
     })
 
   parts = $('<div/>').append(data).find('.part');
@@ -72,10 +80,7 @@ $.get('contents-typeset.html').then(function (data) {
       summaryItem = $('.summary-chapter[data-chapter-num=' + myChapterNum + ']');
       active = (rect.top <= grace && grace <= rect.bottom);
       summaryItem.toggleClass("active", active);
-      if (active) {
-
-      }
-    })
+    });
     $('.part').each(function (order, part) {
       partTitle = $(part).attr('data-part-title');
       $partFront = $(part).find('.part-front');
@@ -83,6 +88,16 @@ $.get('contents-typeset.html').then(function (data) {
       summaryItem = $('.summary-part[data-part-title="' + partTitle + '"] .summary-part-front');
       active = (rect.top <= grace && grace <= rect.bottom);
       summaryItem.toggleClass("active", active);
+    });
+    unitToFix = null;
+    $('.unit-headline').each(function (order, unit) {
+      if (unitToFix) {
+        return;
+      }
+      rect = unit.getBoundingClientRect();
+      if (rect.top >= 0) {
+        unitToFix = unit;
+      }
     })
   });
   $(window).trigger('scroll');
