@@ -1,0 +1,457 @@
+<html lang="en">
+
+<head>
+  <script src="jquery-2.2.2.min.js"></script>
+  <script src="lodash.min.js"></script>
+  <style>
+    /* http://meyerweb.com/eric/tools/css/reset/
+       v2.0 | 20110126
+       License: none (public domain)
+    */
+
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+
+    body {
+      line-height: 1;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    blockquote,
+    q {
+      quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+  </style>
+  <style>
+    /* Small caps */
+
+    .small-caps {
+      font-family: 'Charter SC', serif
+    }
+    /* Double quote (") marks */
+
+    .pull-double {
+      margin-left: -.38em
+    }
+
+    .push-double {
+      margin-right: .38em
+    }
+    /* Single quote (') marks */
+
+    .pull-single {
+      margin-left: -.15em
+    }
+
+    .push-single {
+      margin-right: .15em
+    }
+    /* Optical margin alignment for particular letters */
+
+    .pull-T,
+    .pull-V,
+    .pull-W,
+    .pull-Y {
+      margin-left: -0.07em
+    }
+
+    .push-T,
+    .push-V,
+    .push-W,
+    .push-Y {
+      margin-right: 0.07em
+    }
+
+    .pull-O,
+    .pull-C,
+    .pull-o,
+    .pull-c {
+      margin-left: -0.04em
+    }
+
+    .push-O,
+    .push-C,
+    .push-o,
+    .push-c {
+      margin-right: 0.04em
+    }
+
+    .pull-A {
+      margin-left: -0.03em
+    }
+
+    .push-A {
+      margin-right: 0.03em
+    }
+  </style>
+  <style>
+    @import url(http://fonts.googleapis.com/css?family=EB+Garamond);
+    body {
+      font-size: 28px;
+      line-height: 1.2;
+      font-family: Garamond, EB Garamond, Georgia, serif;
+    }
+
+    p {
+      text-align: justify;
+      hyphens: auto;
+      text-indent: 30px;
+      margin: 0;
+    }
+
+    p:first-child {
+      text-indent: 0;
+    }
+
+    .summary-column-wrapper {
+      width: 400px;
+      padding-right: 100px;
+      position: fixed;
+      top: 0;
+      padding-left: 160px;
+      height: 100%;
+      overflow-x: visible;
+      overflow-y: scroll;
+    }
+
+    .summary-column-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .summary-column {
+      padding-top: 80px;
+      padding-bottom: 100px;
+    }
+
+    .contents-column {
+      margin-left: 670px;
+      padding-top: 350px;
+      width: 550px;
+    }
+
+    .unit-headline {
+      font-style: italic;
+    }
+
+    .unit-headline,
+    .unit-details {
+      margin: 40px 0;
+    }
+
+    .unit-details p {
+      font-size: 24px;
+    }
+
+    .indent {
+      display: block;
+      padding-left: 60px;
+      text-indent: -30px;
+    }
+
+    .part-title,
+    .chapter-number,
+    .chapter-title {
+      font-variant: small-caps;
+      text-transform: lowercase;
+      letter-spacing: 0.16em;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .part-title {
+      font-size: 44px;
+    }
+
+    .part,
+    .part-headline {
+      margin-bottom: 120px;
+    }
+
+    .chapter-headline {
+      margin: 0 55px;
+      font-style: italic;
+    }
+
+    img {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .spread {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .spread img {
+      width: 49%;
+      display: inline;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .summary-part-title {
+      font-variant: small-caps;
+      text-transform: lowercase;
+      text-align: center;
+    }
+
+    .summary-part {
+      margin-bottom: 50px;
+    }
+
+    .summary-part-front,
+    .summary-chapter {
+      margin: 40px 0;
+    }
+
+    .summary-chapter {
+      position: relative;
+    }
+
+    .summary-chapter img {
+      width: 100px;
+      position: absolute;
+      top: 5px;
+      left: -130px;
+      margin: 0;
+    }
+
+    .summary-chapter.active img {
+      top: 15px;
+    }
+
+    .summary-part-title {
+      padding-bottom: 20px;
+    }
+
+    .summary-part-headline {
+      font-size: 26px;
+    }
+
+    .summary-chapter {
+      font-style: italic;
+      font-size: 26px;
+    }
+
+    .title-line {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 40;
+      line-height: 1.5;
+    }
+
+    .title {
+      margin-bottom: 40px;
+    }
+
+    .author {
+      margin-bottom: 50px;
+    }
+
+    .author {
+      text-align: center;
+      font-style: italic;
+      font-size: 26px;
+    }
+    /*.unit-headline-expander {
+      position: relative;
+      top: 13px;
+      visibility: hidden;
+      cursor: pointer;
+    }
+
+    .unit-headline:hover .unit-headline-expander {
+      visibility: visible;
+    }
+
+    .unit-headline-expander:hover {
+      color: red;
+    }*/
+
+    [data-expanded="0"] .unit-details {
+      display: none;
+    }
+
+    .unit-headline i {
+      font-style: normal;
+    }
+
+    .summary-part-front.active,
+    .summary-chapter.active {
+      background-color: #F2F2F2;
+    }
+
+    .summary-part-front,
+    .summary-chapter {
+      cursor: pointer;
+    }
+
+    .active .border-friend {
+      background-color: #F2F2F2;
+      padding: 10px 15px;
+      margin: -10px -15px;
+    }
+
+    .mode-switch {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+      font-size: 40px;
+    }
+    .mode-switch::after {
+      content: '\2296'
+    }
+    [data-expanded="0"] .mode-switch::after {
+      content: '\2295'
+    }
+  </style>
+</head>
+
+<body>
+  <div class="summary-column-wrapper">
+    <div class="summary-column">
+      <div class="title">
+        <div class="title-line">
+          The
+        </div>
+        <div class="title-line">
+          Timeless Way
+        </div>
+        <div class="title-line">
+          Of Building
+        </div>
+      </div>
+      <div class="author">
+        Christopher Alexander
+      </div>
+    </div>
+  </div>
+  <div class="contents-column">
+    <div class="mode-switch"></div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
