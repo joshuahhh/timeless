@@ -214,12 +214,12 @@
     p {
       text-align: justify;
       hyphens: auto;
-      text-indent: 30px;
+      text-indent: 0;
       margin: 0;
     }
 
-    p:first-child {
-      text-indent: 0;
+    p + p {
+      text-indent: 30px;
     }
 
     .summary-column-wrapper {
@@ -297,6 +297,8 @@
       display: block;
       margin-top: 40px;
       margin-bottom: 40px;
+      max-height: 540px;
+      max-width: 100%;
     }
 
     .spread {
@@ -426,6 +428,47 @@
     }
     [data-expanded="0"] .mode-switch::after {
       content: '\2295'
+    }
+
+    th {
+      font-style: italic;
+      text-align: left;
+    }
+
+    td {
+      padding-top: 15px;
+    }
+
+    td, th {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    table {
+      margin-left: -30px;
+      margin-right: -30px;
+    }
+
+    ol {
+      list-style: decimal;
+      padding-left: 30px;
+    }
+
+    .pattern-list {
+      margin-top: 20px;
+    }
+
+    .pattern-list li {
+      font-variant: small-caps;
+      text-transform: lowercase;
+      font-style: normal;
+      margin-left: 50px;
+    }
+
+    .pattern-name {
+      font-variant: small-caps;
+      text-transform: lowercase;
+      font-style: normal;
     }
   </style>
 </head>
